@@ -10,11 +10,15 @@ const petals = Array.from({ length: 22 }, (_, i) => ({
 }));
 
 /** Fixed full-bleed artwork that deepens as the reader scrolls, plus drifting petals. */
-export default function Backdrop() {
+export default function Backdrop({ dimmed = false }: { dimmed?: boolean }) {
   const veil = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
+      if (dimmed) {
+        if (veil.current) veil.current.style.opacity = "1";
+        return;
+      }
       const h = window.innerHeight || 1;
       const t = Math.min(1, Math.max(0, window.scrollY / (h * 0.45)));
       if (veil.current) veil.current.style.opacity = String(t);
@@ -22,7 +26,7 @@ export default function Backdrop() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [dimmed]);
 
   return (
     <div
@@ -37,7 +41,7 @@ export default function Backdrop() {
       <div
         ref={veil}
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_20%,rgba(74,42,107,0.78),rgba(22,11,38,0.95)_75%)] backdrop-blur-[6px]"
-        style={{ opacity: 0 }}
+        style={{ opacity: dimmed ? 1 : 0 }}
       />
       {petals.map((p, i) => (
         <span

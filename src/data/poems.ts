@@ -1,15 +1,21 @@
+export type PoemVessel = "envelope" | "scroll";
+
 export type Poem = {
   id: number;
   title: string;
   mood: string;
+  vessel: PoemVessel;
   lines: string[][];
 };
+
+export const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI"] as const;
 
 export const poems: Poem[] = [
   {
     id: 1,
     title: "The Silence I Could Not Bear",
     mood: "Longing",
+    vessel: "envelope",
     lines: [
       [
         "I still remember how my whole world fell,",
@@ -119,6 +125,7 @@ export const poems: Poem[] = [
     id: 2,
     title: "Between Every Line",
     mood: "Dedication",
+    vessel: "scroll",
     lines: [
       [
         "When darkness settled deep within my heart,",
@@ -228,6 +235,7 @@ export const poems: Poem[] = [
     id: 3,
     title: "The Weight of an Empty Space",
     mood: "Melancholy",
+    vessel: "envelope",
     lines: [
       [
         "Some mornings, I would wake and reach for you,",
@@ -331,6 +339,7 @@ export const poems: Poem[] = [
     id: 4,
     title: "The Stories That Never Left",
     mood: "Tenderness",
+    vessel: "scroll",
     lines: [
       [
         "There were a thousand things I wished to say,",
@@ -482,6 +491,7 @@ export const poems: Poem[] = [
     id: 5,
     title: "The Dawn I Never Expected",
     mood: "Hope",
+    vessel: "envelope",
     lines: [
       [
         "I thought the final light had slipped away,",
@@ -633,6 +643,7 @@ export const poems: Poem[] = [
     id: 6,
     title: "In Every Tomorrow, You",
     mood: "Devotion",
+    vessel: "scroll",
     lines: [
       [
         "If I could gather every star above,",
