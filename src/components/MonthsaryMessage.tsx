@@ -12,11 +12,13 @@ const HeartIcon = ({ className = "" }: { className?: string }) => (
 );
 
 export default function MonthsaryMessage({
+  defaultOpen = false,
   onChapterTwoChange,
 }: {
+  defaultOpen?: boolean;
   onChapterTwoChange?: (state: ChapterTwoVisibility) => void;
 }) {
-  const [stage, setStage] = useState<Stage>("closed");
+  const [stage, setStage] = useState<Stage>(defaultOpen ? "reading" : "closed");
   const sectionRef = useRef<HTMLElement>(null);
   const timers = useRef<number[]>([]);
 
@@ -209,15 +211,16 @@ export default function MonthsaryMessage({
               <p className="first-letter:float-left first-letter:mr-2 first-letter:font-script first-letter:text-6xl first-letter:leading-[0.8] first-letter:text-coral">
                 Another month has slipped by like the last light on the water, and somehow I find
                 that I love you more than I did when it began. I did not know a heart could keep
-                making room, but yours keeps teaching mine how. 
+                making room, but yours keeps teaching mine how.
               </p>
               <p>
                 It has already been six months po since we started my madame, since that one fateful
                 day, and around 7 months na din po from the very time I let my armies drive south.
                 Yet, even as our communications get more and more fragile, we still somehow stuck
-                together, and became even stronger than before. Even if there's times that I'd be too
-                busy, or you're basically grounded, we still find each other in each other's arms, and
-                I couldn't thank you more than everything for staying despite the impossible odds.
+                together, and became even stronger than before. Even if there's times that I'd be
+                too busy, or you're basically grounded, we still find each other in each other's
+                arms, and I couldn't thank you more than everything for staying despite the
+                impossible odds.
               </p>
               <p>
                 I really wish I can send you this po in advance my madame, but unfortunately, we
@@ -230,9 +233,7 @@ export default function MonthsaryMessage({
                 So I wrote you a few poems, small lanterns for the evenings we share. Read them
                 slowly, and know that every line was really just three words in disguise.
               </p>
-              <p>
-                Mwaaaa😘😘😘
-              </p>
+              <p>Mwaaaa😘😘😘</p>
             </div>
 
             <p className="mt-8 text-right font-script text-3xl text-plum-700 sm:text-4xl">

@@ -93,7 +93,6 @@ export default function App() {
           poem={activePoem}
           poemIndex={activePoemIndex}
           onBack={backToChapterTwo}
-          onSelectPoem={openPoemPage}
         />
       ) : (
         <>

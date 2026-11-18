@@ -9,21 +9,16 @@ type PoemPageProps = {
   poem: Poem;
   poemIndex: number;
   onBack: () => void;
-  onSelectPoem: (id: number) => void;
 };
 
 /**
  * Full-page view for an individual poem, presented inside either an
  * interactive sealed envelope or a ribbon-tied parchment scroll.
  */
-export default function PoemPage({ poem, poemIndex, onBack, onSelectPoem }: PoemPageProps) {
+export default function PoemPage({ poem, poemIndex, onBack }: PoemPageProps) {
   const [stage, setStage] = useState<VesselStage>("closed");
 
   const showPoem = stage === "reading" || stage === "folding";
-  const prevIndex = (poemIndex - 1 + poems.length) % poems.length;
-  const nextIndex = (poemIndex + 1) % poems.length;
-  const prevPoem = poems[prevIndex];
-  const nextPoem = poems[nextIndex];
 
   const scrollToTopIfNeeded = () => {
     if (window.scrollY > 120) {
@@ -32,10 +27,10 @@ export default function PoemPage({ poem, poemIndex, onBack, onSelectPoem }: Poem
     }
   };
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, action: () => void) => {
+  const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    action();
+    onBack();
   };
 
   const poemContent = (
@@ -81,7 +76,7 @@ export default function PoemPage({ poem, poemIndex, onBack, onSelectPoem }: Poem
       >
         <a
           href="/#poems"
-          onClick={(e) => handleNavClick(e, onBack)}
+          onClick={handleBackClick}
           className="inline-flex items-center gap-2.5 rounded-full border border-cream/20 bg-plum-950/40 px-5 py-2.5 font-sans text-[11px] uppercase tracking-[0.3em] text-cream/85 backdrop-blur-md transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
         >
           <span aria-hidden>←</span>
@@ -133,30 +128,6 @@ export default function PoemPage({ poem, poemIndex, onBack, onSelectPoem }: Poem
           </Scroll>
         )}
       </div>
-
-      <footer className="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-4 border-t border-cream/15 pt-8">
-        <a
-          href={`/poem/${prevPoem.id}`}
-          onClick={(e) => handleNavClick(e, () => onSelectPoem(prevPoem.id))}
-          className="group flex flex-col items-start rounded-xl border border-cream/10 bg-cream/[0.04] p-4 text-left backdrop-blur-sm transition-all hover:border-gold/45 hover:bg-cream/[0.08] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-        >
-          <span className="font-sans text-[10px] uppercase tracking-[0.35em] text-peach/70 transition-colors group-hover:text-gold">
-            ← Previous &nbsp;·&nbsp; {prevPoem.vessel === "envelope" ? "Envelope" : "Scroll"}
-          </span>
-          <span className="mt-2 font-script text-2xl text-cream sm:text-3xl">{prevPoem.title}</span>
-        </a>
-
-        <a
-          href={`/poem/${nextPoem.id}`}
-          onClick={(e) => handleNavClick(e, () => onSelectPoem(nextPoem.id))}
-          className="group flex flex-col items-end rounded-xl border border-cream/10 bg-cream/[0.04] p-4 text-right backdrop-blur-sm transition-all hover:border-gold/45 hover:bg-cream/[0.08] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-        >
-          <span className="font-sans text-[10px] uppercase tracking-[0.35em] text-peach/70 transition-colors group-hover:text-gold">
-            {nextPoem.vessel === "envelope" ? "Envelope" : "Scroll"} &nbsp;·&nbsp; Next →
-          </span>
-          <span className="mt-2 font-script text-2xl text-cream sm:text-3xl">{nextPoem.title}</span>
-        </a>
-      </footer>
     </section>
   );
 }
