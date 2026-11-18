@@ -13,10 +13,10 @@ export default function Hero() {
 
       <div className="relative" style={{ animation: "rise-in 1.4s cubic-bezier(.2,.7,.2,1) both" }}>
         <p className="font-sans text-[11px] font-light uppercase tracking-[0.5em] text-peach sm:text-xs">
-          A monthsary collection
+          To my madame,
         </p>
         <h1 className="mt-3 font-script text-[clamp(3.4rem,10vw,7.5rem)] leading-[1] text-cream drop-shadow-[0_4px_30px_rgba(22,11,38,0.8)]">
-          Verses at Sunset
+          Happy 6th Monthsary po🩷
         </h1>
         <div className="mx-auto mt-4 flex items-center justify-center gap-4 text-gold">
           <span className="h-px w-14 bg-gradient-to-r from-transparent to-gold" />
